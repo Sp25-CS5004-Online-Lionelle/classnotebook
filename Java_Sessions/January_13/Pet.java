@@ -40,7 +40,7 @@ public class Pet {
     }
 
     public Pet(String petSpecies, String petName){
-        this(petSpecies, petName,1);
+        this(petSpecies, petName, 1);
     }
 
     public Pet(String petSpecies, String petName, int petAge){
@@ -67,8 +67,37 @@ public class Pet {
         this.species = newSpecies;
     }
 
+    //display to the terminal info about the pet
     public void printPet() {
         System.out.println(this.name + " is a " + this.species);
     }
 
+    @Override
+    public String toString(){
+        return String.format("%s - %s\tage = %d\thunger level = %d", name, species, age, hungerLevel);
+    }
+
+    public int getThirstLevel() {
+        return thirstLevel;
+    }
+
+    public void setThirstLevel(int thirstLevel) {
+        this.thirstLevel = thirstLevel;
+    }
+
+    public int getHungerLevel() {
+        return hungerLevel;
+    }
+
+    public void setHungerLevel(int hungerLevel) {
+        this.hungerLevel = hungerLevel;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
