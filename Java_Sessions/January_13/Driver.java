@@ -1,4 +1,4 @@
-class Driver {
+class OldDriver {
 
     public static void main(String[] args) {
         Pet myDog = new Pet("dog", "Her Majesty");
