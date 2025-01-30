@@ -1,4 +1,4 @@
-public abstract class AbstractMedia implements Media {
+public abstract class AbstractMedia implements IMedia {
 
     private String title;
     private String genre;

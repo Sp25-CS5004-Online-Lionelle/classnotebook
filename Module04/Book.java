@@ -12,8 +12,8 @@ public class Book extends AbstractMedia implements IBook {
     }
 
     @Override
-    public MediaEnum getType() {  // interface Media
-        return MediaEnum.BOOK;
+    public MediaTypes getType() {  // interface Media
+        return MediaTypes.BOOK;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Book extends AbstractMedia implements IBook {
         System.out.println("Price: $" + book.getPrice());
         System.out.println(book);
         System.out.println(book.toCSV());
-        if (book.getType() == MediaEnum.BOOK) {
+        if (book.getType() == MediaTypes.BOOK) {
             System.out.println("This is a book.");
         }
     }

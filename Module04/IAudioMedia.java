@@ -1,4 +1,4 @@
-public interface AudioMedia {
+public interface IAudioMedia {
 
     int getTimeBySeconds();
     String getISRC();

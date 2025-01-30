@@ -1,4 +1,4 @@
-public class MusicMedia extends AbstractMedia implements AudioMedia  {
+public class MusicMedia extends AbstractMedia implements IAudioMedia  {
     private String isrc; 
     private int timeBySeconds;
 
@@ -13,8 +13,8 @@ public class MusicMedia extends AbstractMedia implements AudioMedia  {
 
     
     @Override
-    public MediaEnum getType() {  // interface Media
-        return MediaEnum.MUSIC;
+    public MediaTypes getType() {  // interface Media
+        return MediaTypes.MUSIC;
     }
 
     @Override
