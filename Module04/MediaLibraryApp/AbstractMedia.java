@@ -1,3 +1,4 @@
+package MediaLibraryApp;
 public abstract class AbstractMedia implements IMedia {
 
     private String title;

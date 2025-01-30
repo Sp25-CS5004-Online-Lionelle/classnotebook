@@ -1,4 +1,5 @@
-public final class LibraryDriver {
+package MediaLibraryApp;
+public final class AppMain {
 
     public static void main(String[] args) {
         ConsoleView view = ConsoleView.getInstance();

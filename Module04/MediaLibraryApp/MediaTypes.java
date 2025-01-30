@@ -1,3 +1,4 @@
+package MediaLibraryApp;
 public enum MediaTypes {
     AUDIO_BOOK, BOOK, MUSIC;
 

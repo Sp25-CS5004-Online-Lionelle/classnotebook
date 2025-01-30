@@ -1,3 +1,4 @@
+package MediaLibraryApp;
 public class MusicMedia extends AbstractMedia implements IAudioMedia  {
     private String isrc; 
     private int timeBySeconds;
