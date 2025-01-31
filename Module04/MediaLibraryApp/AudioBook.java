@@ -31,7 +31,7 @@ public class AudioBook extends Book implements IAudioMedia {
 
     @Override
     public String toCSV() {  
-        return getTitle() + "," + getGenre() + "," + getYearCreated() + "," + getRating() + "," + getChapters() + "," + isrc + "," + timeBySeconds;
+        return getType() + "," + getTitle() + "," + getGenre() + "," + getYearCreated() + "," + getRating() + "," + getChapters() + "," + isrc + "," + timeBySeconds;
     }
 
     @Override

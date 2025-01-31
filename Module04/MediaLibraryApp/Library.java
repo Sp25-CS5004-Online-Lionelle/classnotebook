@@ -1,16 +1,17 @@
 package MediaLibraryApp;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
 public class Library {
-    private List<IMedia> mediaList;
+    private HashSet<IMedia> mediaList;
 
     public Library() {
-        mediaList = new LinkedList<>();
+        mediaList = new HashSet<>();
     }
 
     public void addMedia(IMedia media) {
+      
         mediaList.add(media);
     }
 

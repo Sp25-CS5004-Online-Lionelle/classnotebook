@@ -103,4 +103,13 @@ public class ConsoleView {
     public void displayMediaList(Stream<IMedia> mediaList) {
         mediaList.forEach(media -> display("%s%n", media)); 
     }
+
+
+    public String getSaveFileName() {
+        return getClientInput("Enter the filename to save the library to: ");
+    }
+
+    public String getFileToOpen() {
+        return getClientInput("Enter the filename to load the library from: ");
+    }
 }

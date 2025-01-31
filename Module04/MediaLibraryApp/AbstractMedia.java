@@ -59,11 +59,32 @@ public abstract class AbstractMedia implements IMedia {
 
 
     @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this.getClass() != obj.getClass()) { // potential gotcha
+            return false;
+        }
+        AbstractMedia other = (AbstractMedia) obj;
+        return this.getType().equals(other.getType()) && 
+                this.title.equals(other.title) && 
+                this.genre.equals(other.genre) && 
+                this.yearCreated == other.yearCreated;
+    }
+
+    @Override
+    public int hashCode() {
+        return getType().hashCode() + title.hashCode() + genre.hashCode() + yearCreated;
+    }
+
+    @Override
     public String toString() {
         return "Type:" + getType() + ", Title: " + title + ", Genre: " + 
                 genre + ", Year: " + yearCreated + ", Rating: " + rating;
     }
 
+    @Override
     public String toCSV() {
         return getType() + "," + title + "," + genre + "," + 
                 yearCreated + "," + rating;

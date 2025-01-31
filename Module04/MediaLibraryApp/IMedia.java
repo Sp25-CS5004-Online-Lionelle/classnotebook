@@ -14,6 +14,7 @@ public interface IMedia {
     double getPrice();
     double getPrice(int discount);
     MediaTypes getType(); 
+    String toCSV();
 
 
     static IMedia fromCSV(String csv) {

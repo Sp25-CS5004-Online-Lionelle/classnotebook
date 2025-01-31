@@ -40,10 +40,12 @@ public final class LibraryManager {
                     view.displayMediaList(library.getMediaList());
                     break;
                 case SAVE:
-                    view.display("Saving the media library to a file.\n");
+                    String filename = view.getSaveFileName();
+                    FileUtils.saveLibrary(library, filename);
                     break;
                 case LOAD:
-                    view.display("Loading the media library from a file.\n");
+                    String openFileName = view.getFileToOpen();
+                    FileUtils.openLibrary(library, openFileName);
                     break;
                 case DETAILS:
                     view.display("Displaying details of a media item.\n");
