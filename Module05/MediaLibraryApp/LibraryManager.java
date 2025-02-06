@@ -21,7 +21,8 @@ public final class LibraryManager {
     }
 
     public void run() {
-        String cmd = view.getCommand();
+        List<String> commands = view.getCommand();
+        String cmd = commands.get(0);
         while (cmd != null) {
             Commands command = Commands.fromString(cmd);
             switch (command) {
@@ -44,11 +45,22 @@ public final class LibraryManager {
                     view.displayMediaList(library.getMediaList());
                     break;
                 case SAVE:
-                    String filename = view.getSaveFileName();
+                    String filename;
+                    if(commands.size() > 1) {
+                        filename = commands.get(1);
+                        
+                    }else {
+                        filename = view.getSaveFileName();
+                    }
                     FileUtils.saveLibrary(library, filename);
                     break;
                 case LOAD:
-                    String openFileName = view.getFileToOpen();
+                    String openFileName;
+                    if(commands.size() > 1 ) {
+                        openFileName = commands.get(1);
+                    } else {
+                        openFileName = view.getFileToOpen();
+                    }
                     FileUtils.openLibrary(library, openFileName);
                     break;
                 case DETAILS:
@@ -63,7 +75,8 @@ public final class LibraryManager {
 
             }
       
-            cmd = view.getCommand();
+            commands = view.getCommand();
+            cmd = commands.get(0);
         }
 
     }
@@ -72,11 +85,11 @@ public final class LibraryManager {
  
 
     private enum Commands {
-        HELP("help|?", "Display this help dialog."), 
+        HELP("help|?",  "Display this help dialog."), 
         ADD("add", "Add a new media item."),
         LIST("list|ls", "List all media items."),
-        SAVE("save", "Save the media library to a file."),
-        LOAD("load|open", "Load the media library from a file."),
+        SAVE("save", "save [filename] - Save the media library to a file. Uses filename if provided"),
+        LOAD("load|open", "open [filename] Load the media library from a file. Uses filename if provided"),
         DETAILS("details", "Display details of a media item."),
         EXIT("exit|bye|goodbye", "Exit the program.");
 

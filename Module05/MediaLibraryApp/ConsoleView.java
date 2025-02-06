@@ -1,5 +1,6 @@
 package MediaLibraryApp;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
@@ -41,8 +42,10 @@ public class ConsoleView {
         display("%s%n", helpDialog);
     }
 
-    public String getCommand() {
-        return getClientInput(cmdPrmpt);
+    public List<String> getCommand() {
+        String line = getClientInput(cmdPrmpt);
+        String[] values = line.split("\\s+", 2);
+        return List.of(values);
     }
 
     public void invalidCommand() {
@@ -100,8 +103,12 @@ public class ConsoleView {
         return List.of(MediaTypes.MUSIC.toString(), title, genre, year, artist, length);
     }
 
-    public void displayMediaList(Stream<IMedia> mediaList) {
-        mediaList.forEach(media -> display("%s%n", media)); 
+    public void displayMediaList(Stream<IMedia> mediaStream) {
+        int counter = 0;
+        List<IMedia> mediaList = mediaStream != null ? mediaStream.toList() : Collections.emptyList();
+        for(IMedia media : mediaList) {
+            display("%d: %s%n", ++counter, media.pretty());
+        }
     }
 
 

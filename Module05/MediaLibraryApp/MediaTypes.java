@@ -1,7 +1,12 @@
 package MediaLibraryApp;
 public enum MediaTypes {
-    AUDIO_BOOK, BOOK, MUSIC;
+    AUDIO_BOOK("Audio Book"), BOOK("Book"), MUSIC("Music");
 
+    private String display;
+
+    private MediaTypes(String display) {
+        this.display = display;
+    }
 
     public static MediaTypes fromString(String type) {
         switch (type.toUpperCase()) {
@@ -19,5 +24,9 @@ public enum MediaTypes {
     @Override
     public String toString() {
         return name();
+    }
+
+    public String pretty() {
+        return display;
     }
 }

@@ -90,4 +90,8 @@ public abstract class AbstractMedia implements IMedia {
                 yearCreated + "," + rating;
     }
 
+    @Override
+    public String pretty() {
+        return String.format("%s, (%d), Format: (%s)", getTitle(), getRating(), getType().pretty());
+    }
 }
