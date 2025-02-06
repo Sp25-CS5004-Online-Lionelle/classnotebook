@@ -1,4 +1,4 @@
-# Module 04  Live Session
+# Module 05  Live Session
 
 
-Module 04 live session builds off Module 03. Some of the files have been changed as the starting files, and a console interface has been added. 
+Module 05 live session builds off Module 04. We have it loading the csv by default, and added more console commands for managing a wishlist and filtering the library. 
