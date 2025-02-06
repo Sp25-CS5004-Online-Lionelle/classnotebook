@@ -1,6 +1,5 @@
 package MediaLibraryApp;
 import java.util.HashSet;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class Library implements Filterable {
