@@ -11,6 +11,7 @@ public enum MediaTypes {
     public static MediaTypes fromString(String type) {
         switch (type.toUpperCase()) {
             case "AUDIO_BOOK":
+            case "AUDIO BOOK":
                 return AUDIO_BOOK;
             case "BOOK":
                 return BOOK;

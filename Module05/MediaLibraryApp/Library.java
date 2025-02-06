@@ -3,15 +3,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Library {
+public class Library implements Filterable {
     private HashSet<IMedia> mediaList;
 
     public Library() {
         mediaList = new HashSet<>();
     }
 
-    public void addMedia(IMedia media) {
-      
+    public void addMedia(IMedia media) {     
         mediaList.add(media);
     }
 
@@ -19,23 +18,36 @@ public class Library {
         return mediaList.stream();
     }
 
-    public List<IMedia> getMatchingTitles(String title) {
-       Stream<IMedia> st = mediaList.stream()
-                .filter(media -> media.getTitle().contains(title))
-                .filter(media -> media.getRating() > 1);
-       return st.toList();
+    @Override
+    public Stream<IMedia> filter(String filter) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'filter'");
     }
 
-    public List<IMedia> getSortedByGenre() {
-        return mediaList.stream()
-//                .sorted((m1, m2) -> m1.getGenre().toLowerCase().compareTo(m2.getGenre().toLowerCase()))
-                .sorted((m1, m2) -> {
-                    String lowerM1 = m1.getGenre().toLowerCase();
-                    String lowerM2 = m2.getGenre().toLowerCase();
-                    return lowerM1.compareTo(lowerM2);
-                })
-                .toList();
+    @Override
+    public Stream<IMedia> filter(String filter, MediaData sortOn) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'filter'");
     }
+
+    @Override
+    public Stream<IMedia> filter(String filter, MediaData sortOn, boolean asc) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'filter'");
+    }
+
+    @Override
+    public void resetFilter() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'resetFilter'");
+    }
+
+    @Override
+    public Stream<IMedia> getFilteredMedia() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getFilteredMedia'");
+    }
+
 
    
 
