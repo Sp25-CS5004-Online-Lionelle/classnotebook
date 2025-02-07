@@ -1,6 +1,7 @@
 package MediaLibraryApp;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public final class LibraryManager {
     private final ConsoleView view;
@@ -25,6 +26,7 @@ public final class LibraryManager {
     public void run() {
         List<String> commands = view.getCommand();
         String cmd = commands.get(0);
+        List<IMedia> currentFilter = library.filter("").toList();
         while (cmd != null) {
             Commands command = Commands.fromString(cmd);
             switch (command) {
@@ -74,10 +76,11 @@ public final class LibraryManager {
                     if(commands.size() > 1) {
                         filter = commands.get(1);
                         Object[] filterParts = getFilterParts(filter);
-                        library.filter((String)filterParts[0], (MediaData)filterParts[1], ((Boolean)filterParts[2]).booleanValue());
+                        currentFilter = library.filter((String)filterParts[0], (MediaData)filterParts[1], ((Boolean)filterParts[2]).booleanValue()).toList();
                     }else {
                         view.display("invalid filter %s%n", commands);
                     }
+                    view.displayMediaList(currentFilter.stream());
                     break;
                 case CHECKOUT:
                     if(commands.size() > 1) {
@@ -86,7 +89,7 @@ public final class LibraryManager {
                         if(subcommand.toLowerCase().startsWith("add")) {
                             strCheckout = subcommand.substring(4).trim();
                             System.out.println(strCheckout);
-                            checkout.addToCart(strCheckout, library.getFilteredMedia());
+                            checkout.addToCart(strCheckout, currentFilter.stream());
                         }else if(commands.get(1).toLowerCase().startsWith("remove")){
                             strCheckout = subcommand.substring(7).trim();
                             System.out.println(strCheckout);

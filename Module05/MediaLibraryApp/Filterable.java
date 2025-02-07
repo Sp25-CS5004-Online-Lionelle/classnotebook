@@ -11,7 +11,6 @@ public interface Filterable {
 
     Stream<IMedia> filter(String filter, MediaData sortOn, boolean asc);
 
-    Stream<IMedia> getFilteredMedia();
 
     void resetFilter();
 
