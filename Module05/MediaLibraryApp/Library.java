@@ -66,8 +66,7 @@ public class Library implements Filterable {
 
     @Override
     public void resetFilter() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'resetFilter'");
+       filteredMediaList = mediaList.stream().toList();
     }
 
 
