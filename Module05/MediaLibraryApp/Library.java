@@ -1,5 +1,4 @@
 package MediaLibraryApp;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.stream.Stream;
 public class Library implements Filterable {
     private HashSet<IMedia> mediaList;
     private List<IMedia> filteredMediaList;
-    private Stream<IMedia> sortedStream;
+
     
     public Library() {
         mediaList = new HashSet<>();
