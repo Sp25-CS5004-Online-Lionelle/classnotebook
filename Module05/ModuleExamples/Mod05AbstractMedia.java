@@ -1,5 +1,5 @@
 package ModuleExamples;
-public abstract class Mod05AbstractMedia implements Mod05IMedia {
+public abstract class Mod05AbstractMedia implements Mod05IMedia, Comparable<Mod05AbstractMedia> {
 
     private String title;
     private String genre;
@@ -93,5 +93,14 @@ public abstract class Mod05AbstractMedia implements Mod05IMedia {
     @Override
     public String pretty() {
         return String.format("%s, (%d), Format: (%s)", getTitle(), getRating(), getType().pretty());
+    }
+
+    @Override
+    public int compareTo(Mod05AbstractMedia o) {
+        int compare = this.title.compareTo(o.title);
+        if(compare == 0) {
+            compare = this.getType().toString().compareTo(o.getType().toString());
+        }
+        return compare;
     }
 }
