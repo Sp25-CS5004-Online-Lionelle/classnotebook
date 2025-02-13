@@ -86,22 +86,24 @@ public final class LibraryManager {
                     if(commands.size() > 1) {
                         String subcommand = commands.get(1);
                         String strCheckout;
+                        try {
                         if(subcommand.toLowerCase().startsWith("add")) {
                             strCheckout = subcommand.substring(4).trim();
-                            System.out.println(strCheckout);
                             checkout.addToCart(strCheckout, currentFilter.stream());
                         }else if(commands.get(1).toLowerCase().startsWith("remove")){
                             strCheckout = subcommand.substring(7).trim();
-                            System.out.println(strCheckout);
                             checkout.removeFromCart(strCheckout);
                         } else {
                             view.display("Unknown checkout commands %s%n", commands);
                         }
-
-
-                    }else {
-                        view.displayMediaList(checkout.getCart().stream());;
+                    }catch (IllegalArgumentException e) {
+                        view.display("Invalid input%n");
                     }
+
+
+                    }
+                    view.displayMediaList(checkout.getCart().stream());;
+                    
                     break;
                 case EXIT:
                     view.display("Exiting the program.\n");
