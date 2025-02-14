@@ -19,9 +19,16 @@ public class ReadCSVExample {
                      .with(schema)
                      .readValues(file);
               List<Book> books = it.readAll();
+              int id = 0;
               for (Book book : books) {
+               book.setId(id++);
                 System.out.println(book);
               }
+              System.out.println("Book Records:");
+              List<IBook.BookRecord> bookRecords = books.stream()
+                     .map(Book::toRecord)
+                     .toList();
+              bookRecords.forEach(System.out::println);
          } catch (Exception e) {
               e.printStackTrace();
          }

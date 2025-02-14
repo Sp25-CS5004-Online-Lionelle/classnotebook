@@ -17,4 +17,7 @@ public interface IBook {
     void setChapters(int chapters);
     String getAuthor();
     void setAuthor(String author);
+
+    record BookRecord(String title, String author, int year, String genre, int rating, int pages, int chapters) {}
+    
 }

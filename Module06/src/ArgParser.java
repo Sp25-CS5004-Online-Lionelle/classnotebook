@@ -10,35 +10,32 @@ public class ArgParser {
 
 
     private Format outputFormat;
-    private String outputLocation;
-    private String inputFile;
-    private Format inputFormat;
-    private String outputFile;
-
+    private String outputLocation = "console";
+    private String inputFile = "books.csv";
+   
     public void parseArgs(String[] args) {
-        Map<String, String> argMap = new HashMap<>();
-        for (String arg : args) {
+        for(int i = 0; i < args.length; i++) {
+            String arg = args[i];
             if (arg.startsWith("-o") || arg.startsWith("--output")) {
-                this.outputFile = arg.split(" ")[1];
-            } else if (arg.startsWith("-i") || arg.startsWith("--input")) {
-                this.inputFile = arg.split(" ")[1];
+                if(i+1 < args.length && args[i + 1] != null && !args[i+1].startsWith("-")) {
+                    this.outputLocation = args[i + 1];
+                    
+                    i++;
+                }
+            }else if (arg.startsWith("-i") || arg.startsWith("--input")) {
+                this.inputFile = args[i+1];
+                i++;
             }
         }
-        this.outputFormat = determineFormat(argMap.getOrDefault("outputFormat", "PRETTY"));
-        this.outputLocation = argMap.getOrDefault("outputLocation", "console");
-        this.inputFile = argMap.getOrDefault("inputFile", this.inputFile != null ? this.inputFile : "books.csv");
-        this.inputFormat = determineFormatFromFile(this.inputFile);
+        this.outputFormat = determineFormatFromFile(this.outputLocation);
+   
     }
 
-    private Format determineFormat(String format) {
-        try {
-            return Format.valueOf(format.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            return Format.UNKNOWN;
-        }
-    }
 
     private Format determineFormatFromFile(String fileName) {
+        if (fileName == null) {
+            return Format.PRETTY;
+        } 
         if (fileName.endsWith(".xml")) {
             return Format.XML;
         } else if (fileName.endsWith(".json")) {
@@ -78,10 +75,12 @@ public class ArgParser {
     }
 
     public Format getInputFormat() {
-        return inputFormat;
+        return determineFormatFromFile(inputFile);
     }
 
-    public String getOutputFile() {
-        return outputFile;
+    public Format getOuFormat() {
+        return determineFormatFromFile(outputLocation);
     }
+
+
 }

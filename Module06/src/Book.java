@@ -125,6 +125,9 @@ public class Book implements IBook {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    public BookRecord toRecord() {
+        return new BookRecord(title, author, year, genre, rating, pages, chapters);
+    }
   
 
   }
