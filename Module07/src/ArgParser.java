@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ArgParser {
     private static final String DEFAULT_OUTPUT_LOCATION = "console";
@@ -14,30 +15,48 @@ public class ArgParser {
     private static final String INPUT_FLAG = "-i";
     private static final String INPUT_FLAG_LONG = "--input";
     private static final String FILTER = "all";
+    private static final String OUT_FORMAT_FLAG_LONG = "--outformat";
+    private static final String OUT_FORMAT_FLAG = "-f";
 
     private String outputLocation = DEFAULT_OUTPUT_LOCATION;
+    private Format outputFormat = Format.PRETTY;
     private String inputFile = DEFAULT_INPUT_FILE;
     private String filter = FILTER;
    
     public void parseArgs(String[] args) {
-        LinkedList<String> argList = new LinkedList<>(Arrays.asList(args));
+        List<String> argList = new LinkedList<>(Arrays.asList(args));
         parseHelpFlag(argList);
         parseOutputFlag(argList);
         parseInputFlag(argList);
+        parseOutformatFlag(argList);
         if (argList.size() > 0) {
             filter = argList.get(0); // last thing in the args list
         }
     }
 
-    private String check_and_get_next(String flag, LinkedList<String> argList) {
+    private String check_and_get_next(String flag, List<String> argList) {
         if (argList.indexOf(flag) + 1 >= argList.size() || 
             argList.get(argList.indexOf(flag) + 1).startsWith("-")) {
             throw new IllegalArgumentException("Invalid format");
         }
         return argList.get(argList.indexOf(flag) + 1);
     }
+    
+    private void parseOutformatFlag(List<String> argList) {
+        if (argList.contains(OUT_FORMAT_FLAG)) {
+            String format = check_and_get_next(OUT_FORMAT_FLAG, argList);
+            outputFormat = Format.valueOf(format.toUpperCase());
+            argList.remove(OUT_FORMAT_FLAG);
+            argList.remove(format);
+        } else if (argList.contains(OUT_FORMAT_FLAG_LONG)) {
+            String format = check_and_get_next(OUT_FORMAT_FLAG_LONG, argList);
+            outputFormat = Format.valueOf(format.toUpperCase());
+            argList.remove(OUT_FORMAT_FLAG_LONG);
+            argList.remove(format);
+        }
+    }
 
-    private void parseHelpFlag(LinkedList<String> argList) {
+    private void parseHelpFlag(List<String> argList) {
         if (argList.contains("--help") || argList.contains("-h")) {
             System.out.println("Usage: java -jar FileConverter.jar [options] [filter]");
             System.out.println("Options:");
@@ -49,7 +68,7 @@ public class ArgParser {
         }
     }
 
-    private void parseOutputFlag(LinkedList<String> argList) {
+    private void parseOutputFlag(List<String> argList) {
         if (argList.contains(OUTPUT_FLAG)) {
             outputLocation = check_and_get_next(OUTPUT_FLAG, argList);
             argList.remove(OUTPUT_FLAG);
@@ -61,7 +80,7 @@ public class ArgParser {
         }
     }
 
-    private void parseInputFlag(LinkedList<String> argList) {
+    private void parseInputFlag(List<String> argList) {
         if (argList.contains(INPUT_FLAG)) {
             inputFile = check_and_get_next(INPUT_FLAG, argList);
             argList.remove(INPUT_FLAG);
@@ -91,7 +110,7 @@ public class ArgParser {
     }
 
     public Format getOutputFormat() {
-        return determineFormatFromFile(outputLocation);
+        return outputFormat;
     }
 
     public OutputStream getOutputStream() {
