@@ -7,7 +7,7 @@ public class FileConverter {
         ArgParser parser = new ArgParser();
         parser.parseArgs(args);
 
-        List<IBook.BookRecord>  books = InputReader.readBooks(parser.getInputStream(), parser.getInputFormat());
+        List<BookRecord>  books = InputReader.readBooks(parser.getInputStream(), parser.getInputFormat());
 
         DataFormatter.write(books, parser.getOutputStream(), parser.getOutputFormat());
         

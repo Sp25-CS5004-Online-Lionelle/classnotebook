@@ -7,7 +7,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 public class InputReader {
 
-    public static List<IBook.BookRecord> readBooks(InputStream source, Format format) {
+    public static List<BookRecord> readBooks(InputStream source, Format format) {
 
         switch (format) {
             case CSV:
@@ -22,16 +22,16 @@ public class InputReader {
     }
 
 
-    private static List<IBook.BookRecord> readXML(InputStream source) {
+    private static List<BookRecord> readXML(InputStream source) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
-    private static List<IBook.BookRecord> readJSON(InputStream source) {
+    private static List<BookRecord> readJSON(InputStream source) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
 
 
-    private static List<IBook.BookRecord> readCSV(InputStream source) {
+    private static List<BookRecord> readCSV(InputStream source) {
         CsvSchema schema = CsvSchema.emptySchema().withHeader();
 
        CsvMapper mapper = new CsvMapper();
@@ -42,9 +42,8 @@ public class InputReader {
                      .with(schema)
                      .readValues(source);
               List<Book> books = it.readAll();
-              int id = 0;
               for (Book book : books) {
-                    book.setId(id++);
+                    if(book.getId() == null) book.setId(slugify(book.getTitle()));
               }
 
               return books.stream().map(Book::toRecord).toList();
@@ -52,6 +51,10 @@ public class InputReader {
               e.printStackTrace();
          }
          return null;
+    }
+
+    private static String slugify(String title) {
+        return title.toLowerCase().replaceAll("[^a-z0-9]", "-");
     }
 
 
