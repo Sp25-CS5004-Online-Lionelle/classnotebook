@@ -11,7 +11,7 @@ public class DataFormatter {
     private DataFormatter() {
     }
 
-    public static void writeJSONData(Collection<IBook.BookRecord> books, OutputStream out) {
+    private static void writeJSONData(Collection<IBook.BookRecord> books, OutputStream out) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         try {
@@ -22,7 +22,7 @@ public class DataFormatter {
 
     }
 
-    public static void writeCSVData(Collection<IBook.BookRecord> books, OutputStream out) {
+    private static void writeCSVData(Collection<IBook.BookRecord> books, OutputStream out) {
         CsvMapper mapper = new CsvMapper();
         CsvSchema schema = mapper.schemaFor(IBook.BookRecord.class).withHeader();
         try {
