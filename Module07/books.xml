@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"  standalone="no"?>
+<BookList>
+  <book>
+    <id>the-catcher-in-the-rye</id>
+    <title>The Catcher in the Rye</title>
+    <author>J.D. Salinger</author>
+    <year>1951</year>
+    <genre>classic</genre>
+    <rating>3</rating>
+    <pages>214</pages>
+    <chapters>26</chapters>
+  </book>
+  <book>
+    <id>the-great-gatsby</id>
+    <title>The Great Gatsby</title>
+    <author>F. Scott Fitzgerald</author>
+    <year>1925</year>
+    <genre>classic</genre>
+    <rating>5</rating>
+    <pages>180</pages>
+    <chapters>9</chapters>
+  </book>
+  <book>
+    <id>1984</id>
+    <title>1984</title>
+    <author>George Orwell</author>
+    <year>1949</year>
+    <genre>dystopian</genre>
+    <rating>4</rating>
+    <pages>328</pages>
+    <chapters>24</chapters>
+  </book>
+  <book>
+    <id>harry-potter-and-the-sorcerer-s-stone</id>
+    <title>Harry Potter and the Sorcerer's Stone</title>
+    <author>J.K. Rowling</author>
+    <year>1997</year>
+    <genre>fantasy</genre>
+    <rating>5</rating>
+    <pages>309</pages>
+    <chapters>17</chapters>
+  </book>
+  <book>
+    <id>the-road</id>
+    <title>The Road</title>
+    <author>Cormac, McCarthy</author>
+    <year>2006</year>
+    <genre>dystopian</genre>
+    <rating>3</rating>
+    <pages>287</pages>
+    <chapters>13</chapters>
+  </book>
+  <book>
+    <id>pride-and-prejudice</id>
+    <title>Pride and Prejudice</title>
+    <author>Jane Austen</author>
+    <year>1813</year>
+    <genre>romance</genre>
+    <rating>4</rating>
+    <pages>279</pages>
+    <chapters>61</chapters>
+  </book>
+  <book>
+    <id>war-and-peace</id>
+    <title>War and Peace</title>
+    <author>Leo Tolstoy</author>
+    <year>1869</year>
+    <genre>classic</genre>
+    <rating>4</rating>
+    <pages>1225</pages>
+    <chapters>365</chapters>
+  </book>
+  <book>
+    <id>the-lord-of-the-rings</id>
+    <title>The Lord of the Rings</title>
+    <author>J.R.R. Tolkien</author>
+    <year>1954</year>
+    <genre>fantasy</genre>
+    <rating>5</rating>
+    <pages>1137</pages>
+    <chapters>22</chapters>
+  </book>
+  <book>
+    <id>the-hobbit</id>
+    <title>The Hobbit</title>
+    <author>J.R.R. Tolkien</author>
+    <year>1937</year>
+    <genre>fantasy</genre>
+    <rating>5</rating>
+    <pages>310</pages>
+    <chapters>19</chapters>
+  </book>
+  <book>
+    <id>stranger-in-a-strange-land</id>
+    <title>Stranger in a Strange Land</title>
+    <author>Robert A. Heinlein</author>
+    <year>1961</year>
+    <genre>sci-fi</genre>
+    <rating>0</rating>
+    <pages>438</pages>
+    <chapters>42</chapters>
+  </book>
+  <book>
+    <id>to-kill-a-mockingbird</id>
+    <title>To Kill a Mockingbird</title>
+    <author>Harper Lee</author>
+    <year>1960</year>
+    <genre>classic</genre>
+    <rating>5</rating>
+    <pages>324</pages>
+    <chapters>31</chapters>
+  </book>
+</BookList>

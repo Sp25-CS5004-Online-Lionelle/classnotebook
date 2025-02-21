@@ -1,3 +1,4 @@
+package model.Formatter;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Collection;
@@ -6,6 +7,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+import model.BookRecord;
 
 public class DataFormatter {
 
@@ -43,6 +47,17 @@ public class DataFormatter {
         
     }
 
+    private static void writeXMLData(Collection<BookRecord> books, OutputStream out) {
+        ObjectMapper mapper = new XmlMapper();
+        XmlWrapper wrapper = new XmlWrapper(books);
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        try {
+            mapper.writeValue(out, wrapper);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void write(Collection<BookRecord> books, OutputStream out, Format format) {
         switch (format) {
             case CSV:
@@ -50,6 +65,9 @@ public class DataFormatter {
                 break;
             case JSON:
                 writeJSONData(books, out);
+                break;
+            case XML:
+                writeXMLData(books, out);
                 break;
             case PRETTY:
                 writePrettyData(books, out);

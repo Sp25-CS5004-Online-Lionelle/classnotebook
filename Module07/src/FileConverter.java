@@ -1,15 +1,18 @@
-import java.util.List;
 
+import controller.ArgController;
+
+import model.BookModel;
 
 public class FileConverter {
     public static void main(String[] args) {
 
-        ArgParser parser = new ArgParser();
+
+        ArgController parser = new ArgController();
         parser.parseArgs(args);
+        BookModel model = BookModel.getInstance(parser.getInputFile());
+        parser.setModel(model);
+        parser.run();
 
-        List<BookRecord>  books = InputReader.readBooks(parser.getInputStream(), parser.getInputFormat());
-
-        DataFormatter.write(books, parser.getOutputStream(), parser.getOutputFormat());
         
 
         

@@ -1,30 +1,36 @@
+package controller;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ArgParser {
+import model.BookModel;
+import model.Formatter.Format;
+
+public class ArgController implements Controller {
     private static final String DEFAULT_OUTPUT_LOCATION = "console";
-    private static final String DEFAULT_INPUT_FILE = "books.csv";
+    private static final String DEFAULT_INPUT_FILE = "books.xml";
     private static final String OUTPUT_FLAG = "-o";
     private static final String OUTPUT_FLAG_LONG = "--output";
     private static final String INPUT_FLAG = "-i";
     private static final String INPUT_FLAG_LONG = "--input";
-    private static final String FILTER = "all";
+    private static final String ALL = "all";
     private static final String OUT_FORMAT_FLAG_LONG = "--outformat";
     private static final String OUT_FORMAT_FLAG = "-f";
 
     private String outputLocation = DEFAULT_OUTPUT_LOCATION;
-    private Format outputFormat = Format.PRETTY;
+    private Format outputFormat = null;
     private String inputFile = DEFAULT_INPUT_FILE;
-    private String filter = FILTER;
+    private BookModel model = null;
+    private String filter = ALL;
    
     public void parseArgs(String[] args) {
-        List<String> argList = new LinkedList<>(Arrays.asList(args));
+        List<String> argList = new ArrayList<>(Arrays.asList(args));
         parseHelpFlag(argList);
         parseOutputFlag(argList);
         parseInputFlag(argList);
@@ -62,6 +68,7 @@ public class ArgParser {
             System.out.println("Options:");
             System.out.println("  -i, --input <file>    Read from <file> instead of the default books.csv");
             System.out.println("  -o, --output <file>   Write to <file> instead of the console");
+            System.out.println("  -f, --outformat <fmt> Write output in the given format (pretty, xml, json, csv, text)");
             System.out.println("  filter                Filter the output by the given key, if it exists");
             System.out.println("  --help                Print this help message");
             System.exit(0);
@@ -114,7 +121,7 @@ public class ArgParser {
     }
 
     public OutputStream getOutputStream() {
-        if ("console".equalsIgnoreCase(outputLocation)) {
+        if (DEFAULT_OUTPUT_LOCATION.equalsIgnoreCase(outputLocation)) {
             return System.out;
         } else {
             try {
@@ -134,9 +141,40 @@ public class ArgParser {
         }
     }
 
-    public Format getInputFormat() {
-        return determineFormatFromFile(inputFile);
+    public String getInputFile() {
+        return inputFile;
     }
+
+    @Override
+    public void setModel(BookModel model) {
+       this.model = model;
+    }
+
+    @Override
+    public void run() {
+        if (model == null) {
+            throw new IllegalArgumentException("Model not set");
+        }
+
+        if (getOutputFormat() == null) {
+            outputFormat = determineFormatFromFile(outputLocation);
+        } 
+        if (filter.equalsIgnoreCase(ALL)) {
+            BookModel.write(model.getBooks(), getOutputStream(), outputFormat);
+        } else {
+            BookModel.write(List.of(model.getBook(filter)), getOutputStream(), outputFormat);
+        }
+
+
+        // model 
+        // output file
+        // output format
+        // filter - maybe
+    }
+
+    // public Format getInputFormat() {
+    //     return determineFormatFromFile(inputFile);
+    // }
 
 
 
